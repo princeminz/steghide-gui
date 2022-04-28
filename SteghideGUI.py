@@ -77,7 +77,7 @@ if __name__ == '__main__':
                 op.extend(['-sf', values['Browse1'] + '/' + values['file_name']])
 
             if values['enc_cover'] and values['enc_algo'] != '' and values['enc_mode'] != '':
-                op.extend(['-e', values['enc_algo'] + ' ' + values['enc_mode']])
+                op.extend(['-e', values['enc_algo'], values['enc_mode']])
             else:
                 op.extend(['-e', 'none'])
 
@@ -90,9 +90,9 @@ if __name__ == '__main__':
                 op.append('-K')
 
             op.extend(['-p', values['pass']])
-
+            print(op)
             try:
-                sg.popup(subprocess.check_output(op, stderr=subprocess.STDOUT).decode("utf-8"))
+                sg.popup(subprocess.check_output(op, stderr=subprocess.STDOUT).decode("utf-8") + '\nEmbedding Process Complete')
             except subprocess.CalledProcessError as e:
                 sg.popup(e.output.decode("utf-8"))
 
@@ -103,7 +103,7 @@ if __name__ == '__main__':
             op.extend(['-p', values['ext_pass']])
 
             try:
-                sg.popup(subprocess.check_output(op, stderr=subprocess.STDOUT).decode("utf-8"))
+                sg.popup(subprocess.check_output(op, stderr=subprocess.STDOUT).decode("utf-8") + '\nExtraction Complete')
             except subprocess.CalledProcessError as e:
                 sg.popup(e.output.decode("utf-8"))
 
